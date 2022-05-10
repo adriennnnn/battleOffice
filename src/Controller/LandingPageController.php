@@ -10,6 +10,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LandingPageController extends AbstractController
 {
+
+
+
+    #[Route(path: '/info', name: 'app_etapdeux')]
+    public function login()
+    {
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+    }
+
     /**
      * @Route("/", name="landing_page")
      * @throws \Exception
