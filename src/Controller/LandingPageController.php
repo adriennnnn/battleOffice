@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Entity\Order;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,8 +28,7 @@ class LandingPageController extends AbstractController
         $entityManager->flush();
 
         return $this->renderForm('landing_page/index_new.html.twig', [
-            'form' => $form
-
+            'form' => $form->createView(),
         ]);
     }
 
