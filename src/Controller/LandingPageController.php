@@ -21,13 +21,14 @@ class LandingPageController extends AbstractController
         //Your code here
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
-      
-        
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()){
         $entityManager->persist($order);
         $entityManager->flush();
-
+         }
         return $this->renderForm('landing_page/index_new.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form
         ]);
     }
 
