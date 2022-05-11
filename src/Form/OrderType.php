@@ -6,6 +6,8 @@ use App\Entity\Order;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 class OrderType extends AbstractType
 {
@@ -15,6 +17,13 @@ class OrderType extends AbstractType
             ->add('commande')
             ->add('deliveryAdress')
             ->add('billingAdress')
+            ->add('country', ChoiceType::class,[
+                'choices'  => [
+                    'france' => null,
+                    'belgique' => true,
+                    'luxembourg' => false,
+                ],
+            ])
             ->add('nameUser')
             ->add('firstnameUser')
             ->add('email')
