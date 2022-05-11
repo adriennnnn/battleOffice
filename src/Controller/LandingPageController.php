@@ -2,38 +2,37 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\User;
+use App\Form\UserType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LandingPageController extends AbstractController
 {
 
-
-
-    // #[Route(path: '/info', name: 'app_etapdeux')]
-    // public function login()
-    // {
-    //     return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
-    // }
-
-    /**
-     * @Route("/", name="landing_page")
+    /* @Route("/", name="landing_page")
      * @throws \Exception
      */
-    public function index(Request $request)
+    public function index(Request $request, EntityManagerInterface $entityManager)
     {
         //Your code here
+        $order = new Order();
+        $form = $this->createForm(OrderType::class, $order);
 
-        return $this->render('landing_page/index_new.html.twig', [
+        $entityManager->persist($order);
+        $entityManager->flush();
+
+        return $this->renderForm('landing_page/index_new.html.twig', [
+            'form' => $form
 
         ]);
     }
-    /**
-     * @Route("/confirmation", name="confirmation")
-     */
+
+    #[Route('/confirmation', name: 'app_confirmation')]
     public function confirmation()
     {
         return $this->render('landing_page/confirmation.html.twig', [
