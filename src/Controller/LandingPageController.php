@@ -21,7 +21,15 @@ class LandingPageController extends AbstractController
         //Your code here
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
-
+        // $order->setCommande(false);
+        // $order->setDeliveryAdress(false);
+        // $order->setbillingAdress(false);
+        // $order->setnameUser(false);
+        // $order->setfirstnameUser(false);
+        // $order->setemail(false);
+        // $order->setproductBY(false);
+        // $order->setmethodOfPayment(false);
+        
         $entityManager->persist($order);
         $entityManager->flush();
 
