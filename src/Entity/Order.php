@@ -41,6 +41,21 @@ class Order
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $country;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $ComplementAdress;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $City;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $postalCode;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $phone;
+
+    #[ORM\Column(type: 'boolean')]
+    private $AddAnotherDeliveryAdress;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -150,6 +165,66 @@ class Order
     public function setCountry(string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    public function getComplementAdress(): ?string
+    {
+        return $this->ComplementAdress;
+    }
+
+    public function setComplementAdress(string $ComplementAdress): self
+    {
+        $this->ComplementAdress = $ComplementAdress;
+
+        return $this;
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->City;
+    }
+
+    public function setCity(string $City): self
+    {
+        $this->City = $City;
+
+        return $this;
+    }
+
+    public function getPostalCode(): ?string
+    {
+        return $this->postalCode;
+    }
+
+    public function setPostalCode(string $postalCode): self
+    {
+        $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function isAddAnotherDeliveryAdress(): ?bool
+    {
+        return $this->AddAnotherDeliveryAdress;
+    }
+
+    public function setAddAnotherDeliveryAdress(bool $AddAnotherDeliveryAdress): self
+    {
+        $this->AddAnotherDeliveryAdress = $AddAnotherDeliveryAdress;
 
         return $this;
     }

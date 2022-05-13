@@ -17,6 +17,9 @@ class OrderType extends AbstractType
             ->add('commande')
             ->add('deliveryAdress')
             ->add('billingAdress')
+            ->add('ComplementAdress')
+            ->add('city')
+            ->add('postalCode')
             ->add('country', ChoiceType::class,[
                 'choices'  => [
                     'france' => null,
@@ -29,6 +32,8 @@ class OrderType extends AbstractType
             ->add('email')
             ->add('productBY')
             ->add('methodOfPayment')
+            ->add('phone')
+            ->add('AddAnotherDeliveryAdress')
         ;
     }
 
