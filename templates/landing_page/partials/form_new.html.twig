@@ -72,7 +72,7 @@
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-                <input type="text">
+				{{ form_widget(form.confirm_email, {'attr': { "required": false }}) }}
 				<label>Confirmation email</label>
 				<div class="form-error"></div>
 			</div>
@@ -84,22 +84,22 @@
 				<i class="material-icons">markunread_mailbox</i>Adresse de livraison différente ?</div>
 			<div class="collapsible-body">
 				<div class="input-field">
-					{{ form_widget(formdelivery.firstnameUser, {'attr': { "required": false }}) }}
+					{{ form_widget(formdelivery.firstname, {'attr': { "required": false }}) }}
 					<label>Prénom</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(formdelivery.nameUser, {'attr': { "required": false }}) }}
+					{{ form_widget(formdelivery.name, {'attr': { "required": false }}) }}
 					<label>Nom</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(formdelivery.deliveryAdress, {'attr': { "required": false }}) }}
+					{{ form_widget(formdelivery.adress, {'attr': { "required": false }}) }}
 					<label>Adresse</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(formdelivery.ComplementAdress, {'attr': { "required": false }}) }}
+					{{ form_widget(formdelivery.complementAdress, {'attr': { "required": false }}) }}
 					<label>Complément adr.</label>
 					<div class="form-error"></div>
 				</div>

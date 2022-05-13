@@ -30,6 +30,7 @@ class OrderType extends AbstractType
             ->add('nameUser')
             ->add('firstnameUser')
             ->add('email')
+            ->add('confirm_email')
             ->add('productBY')
             ->add('methodOfPayment')
             ->add('phone')

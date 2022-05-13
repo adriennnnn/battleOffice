@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: '`order`')]
@@ -31,6 +32,9 @@ class Order
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $email;
+
+    #[Assert\EqualTo(propertyPath:"email", message:"Vous n'avez pas indiquer le même email")]
+    public $confirm_email;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $productBY;
