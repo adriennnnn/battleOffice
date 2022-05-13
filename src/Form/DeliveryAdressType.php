@@ -2,22 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Order;
+use App\Entity\DeliveryAdress;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-
-class OrderType extends AbstractType
+class DeliveryAdressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('commande')
-            ->add('deliveryAdress')
-            ->add('billingAdress')
-            ->add('ComplementAdress')
+            ->add('name')
+            ->add('firstname')
+            ->add('adress')
+            ->add('complementAdress')
             ->add('city')
             ->add('postalCode')
             ->add('country', ChoiceType::class,[
@@ -26,21 +24,15 @@ class OrderType extends AbstractType
                     'belgique' => true,
                     'luxembourg' => false,
                 ],
-            ])
-            ->add('nameUser')
-            ->add('firstnameUser')
-            ->add('email')
-            ->add('productBY')
-            ->add('methodOfPayment')
+            ])            ->add('Payement')
             ->add('phone')
-            ->add('AddAnotherDeliveryAdress')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Order::class,
+            'data_class' => DeliveryAdress::class,
         ]);
     }
 }
