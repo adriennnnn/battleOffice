@@ -39,7 +39,8 @@ class LandingPageController extends AbstractController
         $entityManager->flush();
          }
         return $this->renderForm('landing_page/index_new.html.twig', [
-            'form' => $form
+            'form' => $form ,
+            'formdelivery' => $formdelivery
         ]);
     }
 
