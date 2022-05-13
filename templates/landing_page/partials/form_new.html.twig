@@ -17,22 +17,22 @@
 		<p class="h6 center-align">Remplissez ce formulaire</p>*
 		<div class="form-wrapper">
 			<div class="input-field">
-				{{ form_widget(form.firstname) }}
+				{{ form_widget(form.firstnameUser) }}
 				<label>Prénom</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.name, {'attr': { "required": false }}) }}
+				{{ form_widget(form.nameUser, {'attr': { "required": false }}) }}
 				<label>Nom</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.adress, {'attr': { "required": false }}) }}
+				{{ form_widget(form.billingAdress, {'attr': { "required": false }}) }}
 				<label>Adresse</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.complement_adress, {'attr': { "required": false }}) }}
+				{{ form_widget(form.ComplementAdress, {'attr': { "required": false }}) }}
 				<label>Complément adr.</label>
 				<div class="form-error"></div>
 			</div>
@@ -42,7 +42,7 @@
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.postal_code, {'attr': { "required": false }}) }}
+				{{ form_widget(form.postalCode, {'attr': { "required": false }}) }}
 				<label>Code postal</label>
 				<div class="form-error"></div>
 			</div>
@@ -84,22 +84,22 @@
 				<i class="material-icons">markunread_mailbox</i>Adresse de livraison différente ?</div>
 			<div class="collapsible-body">
 				<div class="input-field">
-					{{ form_widget(form.delivery.firstname, {'attr': { "required": false }}) }}
+					{{ form_widget(form.delivery.firstnameUser, {'attr': { "required": false }}) }}
 					<label>Prénom</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(form.delivery.name, {'attr': { "required": false }}) }}
+					{{ form_widget(form.delivery.nameUser, {'attr': { "required": false }}) }}
 					<label>Nom</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(form.delivery.adress, {'attr': { "required": false }}) }}
+					{{ form_widget(form.delivery.deliveryAdress, {'attr': { "required": false }}) }}
 					<label>Adresse</label>
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(form.delivery.complement_adress, {'attr': { "required": false }}) }}
+					{{ form_widget(form.delivery.ComplementAdress, {'attr': { "required": false }}) }}
 					<label>Complément adr.</label>
 					<div class="form-error"></div>
 				</div>
@@ -109,7 +109,7 @@
 					<div class="form-error"></div>
 				</div>
 				<div class="input-field">
-					{{ form_widget(form.delivery.postal_code, {'attr': { "required": false }}) }}
+					{{ form_widget(form.delivery.postalCode, {'attr': { "required": false }}) }}
 					<label>Code postal</label>
 					<div class="form-error"></div>
 				</div>
