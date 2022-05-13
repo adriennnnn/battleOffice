@@ -6,6 +6,8 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Form\OrderType;
 use App\Entity\Order;
+use App\Entity\DeliveryAdress;
+use App\Form\DeliveryAdressType;
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +24,15 @@ class LandingPageController extends AbstractController
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
+
+        $deliveryAdress = new DeliveryAdress();
+        $formdelivery = $this->createForm(DeliveryAdressType::class, $deliveryAdress);
+        $formdelivery->handleRequest($request);
+
+        if($formdelivery->isSubmitted() && $formdelivery->isValid()){
+        $entityManager->persist($deliveryAdress);
+        $entityManager->flush();
+         }
 
         if($form->isSubmitted() && $form->isValid()){
         $entityManager->persist($order);
