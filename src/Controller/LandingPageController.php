@@ -7,6 +7,7 @@ use App\Form\UserType;
 use App\Form\OrderType;
 use App\Entity\Order;
 use App\Entity\DeliveryAdress;
+use App\Repository\ItemChoseRepository;
 use App\Form\DeliveryAdressType;
 use Doctrine\Common\Collections\Expr\Value;
 use Symfony\Component\Form\Form;
@@ -21,8 +22,9 @@ class LandingPageController extends AbstractController
 
     public const LOGIN_ROUTE = 'app_item_select';
 
+    
     #[Route('/', name: 'landing_page')]
-    public function index(Request $request, EntityManagerInterface $entityManager)
+    public function index(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $ItemChoseRepository)
     {
         //Your code here
         $order = new Order();
@@ -49,7 +51,10 @@ class LandingPageController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
         $entityManager->persist($order);
         $entityManager->flush();
-         }
+        }
+
+        $product = $ItemChoseRepository->findAll();
+        $payment= $PaymentRepository;
 
         if ($deliveryAdress->getFirstname() === null && $deliveryAdress->getName() === null && $deliveryAdress->getAdress() === null){
 
@@ -57,7 +62,7 @@ class LandingPageController extends AbstractController
                 [
                         "order"=> [
                             "id"=> "1",
-                            "product"=> $product->getName(),
+                            "product"=> $product->getProductBY(),
                             "payment_method"=> $paymentMethode,
                             "status"=> "WAITING",
                         "client"=> [
@@ -70,14 +75,14 @@ class LandingPageController extends AbstractController
                             "address_line1"=> $form->getAdress(),
                             "address_line2"=> $form->getComplementAdress(),
                             "city"=> $form->getCity(),
-                            "zipcode"=> $form->getCp(),
+                            "zipcode"=> $form->getPostalCode(),
                             "country"=> $form->getCountry(),
                             "phone"=> $form->getTel()
                             ],
                         "shipping"=> [
                             "address_line1"=> $form->getAdress(),
                             "address_line2"=> $form->getComplementAdress(),
-                            "zipcode"=> $form->getCp(),
+                            "zipcode"=> $form->getPostalCode(),
                             "country"=> $form->getCountry(),
                             "phone"=> $form->getTel()
                             ]
@@ -107,7 +112,7 @@ class LandingPageController extends AbstractController
                             "address_line1"=> $form->getAdress(),
                             "address_line2"=> $form->getComplementAdress(),
                             "city"=> $form->getCity(),
-                            "zipcode"=> $form->getCp(),
+                            "zipcode"=> $form->getPostalCode(),
                             "country"=> $form->getCountry(),
                             "phone"=> $form->getTel()
                             ],
@@ -115,9 +120,9 @@ class LandingPageController extends AbstractController
                             "address_line1"=> $deliveryAdress->getAdress(),
                             "address_line2"=> $deliveryAdress->getComplementAdress(),
                             "city"=> $deliveryAdress->getCity(),
-                            "zipcode"=> $deliveryAdress->getCp(),
+                            "zipcode"=> $deliveryAdress->getPostalCode(),
                             "country"=> $deliveryAdress->getCountry(),
-                            "phone"=> $deliveryAdress->getTel()
+                            "phone"=> $deliveryAdress->getPhone()
                             ]
                         ]   
                     ]
