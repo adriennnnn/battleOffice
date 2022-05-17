@@ -29,6 +29,7 @@ class LandingPageController extends AbstractController
     {
         //Your code here
         $order = new Order();
+        $ItemChose = $ItemChoseRepository->findAll();
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
@@ -133,7 +134,8 @@ class LandingPageController extends AbstractController
 
         return $this->renderForm('landing_page/index_new.html.twig', [
             'form' => $form ,
-            'formdelivery' => $formdelivery
+            'formdelivery' => $formdelivery,
+            'ItemChose' => $ItemChose
         ]);
     }
 
