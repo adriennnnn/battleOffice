@@ -7,14 +7,14 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductType extends AbstractType
+class ItemType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('itemName')
             ->add('itemPrice')
-            ->add('string')
+            ->add('img')
             // ->add('payments')
             ->add('pricePromo')
         ;

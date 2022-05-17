@@ -14,9 +14,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ItemController extends AbstractController
 {
     #[Route('/', name: 'index_item')]
-    public function index(ItemChoseRepository $productRepository)
+    public function index(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $productRepository)
     {
-        return $this->render('landing_page/index.html.twig', [
+        $order = new ItemChose();
+        $ItemChose = $this->createForm(ItemType::class, $order);
+        $ItemChose->handleRequest($request);
+
+        if($ItemChose->isSubmitted() && $ItemChose->isValid()){
+        $entityManager->persist($order);
+        $entityManager->flush();
+        } 
+
+        return $this->render('landing_page/index_new.html.twig', [
             'products' => $productRepository->findAll(),
         ]);
 
