@@ -16,8 +16,14 @@ class ItemChose
     #[ORM\Column(type: 'string', length: 255)]
     private $itemName;
 
+    #[ORM\Column(type: 'integer')]
+    private $itemPrice;
+
     #[ORM\Column(type: 'string', length: 255)]
-    private $ItemPrice;
+    private $img;
+
+    #[ORM\Column(type: 'integer')]
+    private $pricePromo;
 
     public function getId(): ?int
     {
@@ -36,14 +42,38 @@ class ItemChose
         return $this;
     }
 
-    public function getItemPrice(): ?string
+    public function getItemPrice(): ?int
     {
-        return $this->ItemPrice;
+        return $this->itemPrice;
     }
 
-    public function setItemPrice(string $ItemPrice): self
+    public function setItemPrice(string $itemPrice): self
     {
-        $this->ItemPrice = $ItemPrice;
+        $this->itemPrice = $itemPrice;
+
+        return $this;
+    }
+
+    public function getImg(): ?string
+    {
+        return $this->img;
+    }
+
+    public function setImg(string $img): self
+    {
+        $this->img = $img;
+
+        return $this;
+    }
+
+    public function getPricePromo(): ?int
+    {
+        return $this->pricePromo;
+    }
+
+    public function setPricePromo(int $pricePromo): self
+    {
+        $this->pricePromo = $pricePromo;
 
         return $this;
     }
