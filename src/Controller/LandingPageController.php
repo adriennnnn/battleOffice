@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class LandingPageController extends AbstractController
 {
@@ -25,7 +26,7 @@ class LandingPageController extends AbstractController
 
     
     #[Route('/', name: 'landing_page')]
-    public function index(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $ItemChoseRepository)
+    public function index(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $ItemChoseRepository, HttpClientInterface $client)
     {
         //Your code here
         $order = new Order();
@@ -55,82 +56,68 @@ class LandingPageController extends AbstractController
         $entityManager->flush();
         }
 
-//         $product = $ItemChoseRepository->findAll();
-//         $payment= $PaymentRepository;
+        $product = $ItemChoseRepository->findAll();
+        $payment= $PaymentRepository;
 
-//         if ($deliveryAdress->getFirstname() === null && $deliveryAdress->getName() === null && $deliveryAdress->getAdress() === null){
+        if ($deliveryAdress->getFirstname() === null && $deliveryAdress->getName() === null && $deliveryAdress->getAdress() === null){
 
-//             $data =
-//                 [
-//                         "order"=> [
-//                             "id"=> "1",
-//                             "product"=> $product->getProductBY(),
-//                             "payment_method"=> $paymentMethode,
-//                             "status"=> "WAITING",
-//                         "client"=> [
-//                             "firstname"=> $form->getFirstnameUser(),
-//                             "lastname"=> $form->getName(),
-//                             "email"=> $form->getEmail()
-//                             ],
-//                         "addresses"=> [
-//                             "billing"=> [
-//                             "address_line1"=> $form->getAdress(),
-//                             "address_line2"=> $form->getComplementAdress(),
-//                             "city"=> $form->getCity(),
-//                             "zipcode"=> $form->getPostalCode(),
-//                             "country"=> $form->getCountry(),
-//                             "phone"=> $form->getTel()
-//                             ],
-//                         "shipping"=> [
-//                             "address_line1"=> $form->getAdress(),
-//                             "address_line2"=> $form->getComplementAdress(),
-//                             "zipcode"=> $form->getPostalCode(),
-//                             "country"=> $form->getCountry(),
-//                             "phone"=> $form->getTel()
-//                             ]
-//                         ]   
-//                     ]
+            $data =
+                [
+                        "order"=> [
+                            "id"=> "1",
+                            "product"=> $product->getProductBY(),
+                            "payment_method"=> $paymentMethode,
+                            "status"=> "WAITING",
+                        "client"=> [
+                            "firstname"=> $form->getFirstnameUser(),
+                            "lastname"=> $form->getName(),
+                            "email"=> $form->getEmail()
+                            ],
+                        "addresses"=> [
+                            "billing"=> [
+                            "address_line1"=> $form->getAdress(),
+                            "address_line2"=> $form->getComplementAdress(),
+                            "city"=> $form->getCity(),
+                            "zipcode"=> $form->getPostalCode(),
+                            "country"=> $form->getCountry(),
+                            "phone"=> $form->getTel()
+                            ],
+                        "shipping"=> [
+                            "address_line1"=> $form->getAdress(),
+                            "address_line2"=> $form->getComplementAdress(),
+                            "zipcode"=> $form->getPostalCode(),
+                            "country"=> $form->getCountry(),
+                            "phone"=> $form->getTel()
+                            ]
+                        ]   
+                    ]
                 
-//             ];
+            ];
+ }
 
+ $response = $this->client->request(
+    'POST',
+    'https://api-commerce.simplon-roanne.com/order',
+    ['headers'=> [
+        'accept'=> 'application/json' , 
+        'Authorization'=> 'Bearer mJxTXVXMfRzLg6ZdhUhM4F6Eutcm1ZiPk4fNmvBMxyNR4ciRsc8v0hOmlzA0vTaX ',
+        'Contente-Type'=> 'application/json', 
+    ],
+    'verify_peer' => false, 'verify_host' => false, 
+    'body'=> $data
+    ]
+);
 
+$statusCode = $response->getStatusCode();
+// $statusCode = 200
+$contentType = $response->getHeaders()['content-type'][0];
+// $contentType = 'application/json'
+$content = $response->getContent();
+// $content = '{"id":521583, "name":"symfony-docs", ...}'
+$content = $response->toArray();
+// $content = ['id' => 521583, 'name' => 'symfony-docs', ...]
 
-//         }else{
- 
-//             $data =
-//                 [
-//                         "order"=> [
-//                             "id"=> "1",
-//                             "product"=> $product->getName(),
-//                             "payment_method"=> $payment->getModePayment(),
-//                             "status"=> "WAITING",
-//                         "client"=> [
-//                             "firstname"=> $form->getFirstname(),
-//                             "lastname"=> $form->getName(),
-//                             "email"=> $form->getEmail()
-//                             ],
-//                         "addresses"=> [
-//                             "billing"=> [
-//                             "address_line1"=> $form->getAdress(),
-//                             "address_line2"=> $form->getComplementAdress(),
-//                             "city"=> $form->getCity(),
-//                             "zipcode"=> $form->getPostalCode(),
-//                             "country"=> $form->getCountry(),
-//                             "phone"=> $form->getTel()
-//                             ],
-//                         "shipping"=> [
-//                             "address_line1"=> $deliveryAdress->getAdress(),
-//                             "address_line2"=> $deliveryAdress->getComplementAdress(),
-//                             "city"=> $deliveryAdress->getCity(),
-//                             "zipcode"=> $deliveryAdress->getPostalCode(),
-//                             "country"=> $deliveryAdress->getCountry(),
-//                             "phone"=> $deliveryAdress->getPhone()
-//                             ]
-//                         ]   
-//                     ]
-                
-//             ];
-//  }
+return $content;
 
         return $this->renderForm('landing_page/index_new.html.twig', [
             'form' => $form ,
