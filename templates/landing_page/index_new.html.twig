@@ -45,7 +45,7 @@
 
 
 
-						{% for product in ItemChose %}
+						{% for product in Item %}
 							<label class="cure-radio">
 								<input name="product" value="{{ product.id }}" type="radio" required>
 								<article>
@@ -53,21 +53,22 @@
 										<div class="row">
 											<div class="col s12 m12 l4">
 												<div class="image-content">
-													<img src="{{ asset (product.img) }}" alt="nerf" class="responsive-img">
+													<img src="{{ (product.img) }}" alt="nerf" class="responsive-img">
 												</div>
 											</div>
 											<div class="col s12 m6 l4">
 												<div class="card-content">
 													<p class="h6">
-														{{product.name}}
+														{{product.itemName}}
 													</p>
 													<p class="h5 color_brand_secondary">
-														{{product.textPromo}}
+														{# {{product.pricePromo}} #}
+														jsp quoi
 													</p>
 													<p class="h4">
-														{{ product.pricePromo / 100 ~ 0}}€
+														{{ (product.itemPrice - product.pricePromo) / 100 ~ 0}}€
 														<span class="h6"><br>au lieu de
-															<del class="h5 color_brand_secondary">{{product.price / 100 ~ 0}}€</del>
+															<del class="h5 color_brand_secondary">{{product.itemPrice / 100 ~ 0}}€</del>
 														</span>
 													</p>
 												</div>
@@ -76,13 +77,13 @@
 												<div class="card-content">
 													<p class="h6 color_brand_secondary">
 														J'économise
-														{{ (product.price - product.pricePromo) / 100 }}€
+														{{ (product.pricePromo) / 100 }}€
 													</p>
 													<p class="h6">
 														+ livraison gratuite
 													</p>
 													<div class="picto-wrapper">
-														<img src="{{ asset ('assets/images/like-product.png') }}" class="responsive-img" alt="Garantie satisfait ou remboursé">
+														<img src="{{ ('assets/images/like-product.png') }}" class="responsive-img" alt="Garantie satisfait ou remboursé">
 														<p class="color_brand_primary">Satisfait<br>ou remboursé</p>
 													</div>
 												</div>
@@ -91,7 +92,6 @@
 									</div>
 								</article>
 							</label>
-						{% endfor %}
 						{# <label class="cure-radio">
 						                            <input name="order[cart][cart_products][0]" value="2" type="radio">
 						                            <article>
@@ -216,6 +216,7 @@
 						                                </div>
 						                            </article>
 						                        </label> #}
+						{% endfor %}
 						<h6 class="center-align">OUI ! Je veux profiter de cette offre exceptionnelle et créer une guerre au bureau.</h6>
 						<p class="center-align">Je bénéficie gratuitement de la garantie
 							<b>100% satisfait ou remboursé</b><br>A tous moment durant ma cure, je peux retourner mes Nerfs et me faire rembourser immédiatement.</p>

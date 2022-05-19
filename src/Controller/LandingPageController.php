@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Order;
 use App\Form\UserType;
+use App\Form\ItemType;
 use App\Form\OrderType;
 use App\Entity\ItemChose;
 use App\Entity\DeliveryAdress;
@@ -22,15 +23,17 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class LandingPageController extends AbstractController
 {
 
-    public const LOGIN_ROUTE = 'app_item_select';
+    // public const LOGIN_ROUTE = 'app_item_select';
 
     
     #[Route('/', name: 'landing_page')]
+
     public function index(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $ItemChoseRepository, HttpClientInterface $client)
+
+  
     {
-        //Your code here
+        // Your code here
         $order = new Order();
-        $ItemChose = $ItemChoseRepository->findAll();
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
@@ -38,23 +41,61 @@ class LandingPageController extends AbstractController
         $formdelivery = $this->createForm(DeliveryAdressType::class, $deliveryAdress);
         $formdelivery->handleRequest($request);
 
+        $ItemChose = new ItemChose();
+        $Item = $this->createForm(ItemType::class, $ItemChose);
+        $Item->handleRequest($request);
+
+        // $Products = $productRepository->findAll();
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $id = $request->get('Product');
+        //     $ProductId = $productRepository->find($id);
+        //     $addProduct = $order->addProduct($ProductId);
+        //     $entityManager->persist($order->setForm($ItemChose));
+        //     $entityManager->persist($addProduct);
+        //     $entityManager->persist($ItemChose);
+        //     $entityManager->flush();
+
+        //     return $this->render('landing_page/confirmation.html.twig');
+        // }
+
+
+        if($Item->isSubmitted() && $Item->isValid()){
+        $entityManager->persist($ItemChose);
+        $entityManager->flush();
+        } 
+
+
         if($formdelivery->isSubmitted() && $formdelivery->isValid()){
         $entityManager->persist($deliveryAdress);
         $entityManager->flush();
-            // if(Value == "lpmonetico"){
-            //     $this->redirect('https://api-commerce.simplon-roanne.com/order');
+        }
 
-            // }
-            // if(Value == "lppaypal"){
-            //     $this->redirect('https://api-commerce.simplon-roanne.com/order');
+
+        // $ItemChose = new ItemChose();
+        // $order = new Order();
+        // $form = $this->createForm(OrderType::class, $order);
+        // $form->handleRequest($request);
+
+        // if($form->isSubmitted() && $form->isValid()){
+        //     // if(Value == "lpmonetico"){
+        //         $entityManager->persist($ItemChose);
+        //         $entityManager->flush();
+        //         $entityManager->persist($order);
+        //         $entityManager->flush();
+        //         return $this->render('landing_page/confirmation.html.twig', []);
+        //     // }
+        //     // if(Value == "lppaypal"){
                 
-            // }
-         }
+        //         // return $this->render('landing_page/confirmation.html.twig', []);
+                
+        //     // }
+        //  }
 
         if($form->isSubmitted() && $form->isValid()){
         $entityManager->persist($order);
         $entityManager->flush();
         }
+
 
         $product = $ItemChoseRepository->findAll();
         $payment= $PaymentRepository;
@@ -119,33 +160,18 @@ $content = $response->toArray();
 
 return $content;
 
+//         $product = $ItemChoseRepository->findAll();
+//         $payment= $PaymentRepository;
+
+
+
         return $this->renderForm('landing_page/index_new.html.twig', [
             'form' => $form ,
             'formdelivery' => $formdelivery,
-            'ItemChose' => $ItemChose
+            'Item' => $productRepository->findAll()
         ]);
     }
-
-
-    // #[Route('select', name: 'app_item_select')]
-    // public function ItemSelect(Request $request, EntityManagerInterface $entityManager, ItemChoseRepository $ItemChoseRepository){
-
-    //     $itemChose = new ItemChose();
-    //     $form = $this->createForm(OrderType::class, $itemChose);
-    //     $form->handleRequest($request);
-
-    //     if($formdelivery->isSubmitted() && $formdelivery->isValid()){
-    //         $entityManager->persist($deliveryAdress);
-    //         $entityManager->flush();
-    //      }
-
-    //     return $this->renderForm('landing_page/index_new.html.twig', [
-    //        'form' => $form ,
-    //     //    'formdelivery' => $formdelivery
-    //     ]);
-
-        
-    // }
+    
 
     #[Route('/confirmation', name: 'app_confirmation')]
     public function confirmation()
