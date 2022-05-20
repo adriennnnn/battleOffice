@@ -2,15 +2,14 @@
 
 namespace App\Form;
 
-
-use App\Entity\DeliveryAdress;
+use App\Entity\BilingAdress;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 
-class DeliveryAdressType extends AbstractType
+class BilingAdressType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -27,7 +26,7 @@ class DeliveryAdressType extends AbstractType
                     'belgique' => 'belgique',
                     'luxembourg' => 'luxembourg',
                 ],
-            ])         
+            ])   
             ->add('phone')
         ;
     }
@@ -35,7 +34,7 @@ class DeliveryAdressType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => DeliveryAdress::class,
+            'data_class' => BilingAdress::class,
         ]);
     }
 }
