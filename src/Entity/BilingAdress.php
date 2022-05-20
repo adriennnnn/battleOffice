@@ -2,18 +2,20 @@
 
 namespace App\Entity;
 
-use App\Repository\DeliveryAdressRepository;
+use App\Repository\BilingAdressRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DeliveryAdressRepository::class)]
-class DeliveryAdress
+#[ORM\Entity(repositoryClass: BilingAdressRepository::class)]
+class BilingAdress
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(type: 'string', length: 255)]
     private $name;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
@@ -36,6 +38,7 @@ class DeliveryAdress
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $phone;
+
 
     public function getId(): ?int
     {
@@ -138,4 +141,5 @@ class DeliveryAdress
         return $this;
     }
 
+    
 }
