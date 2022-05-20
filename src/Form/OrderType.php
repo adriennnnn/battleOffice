@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Order;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -14,27 +15,10 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('commande')
-            ->add('deliveryAdress')
-            ->add('billingAdress')
-            ->add('ComplementAdress')
-            ->add('city')
-            ->add('postalCode')
-            ->add('country', ChoiceType::class,[
-                'choices'  => [
-                    'france' => null,
-                    'belgique' => true,
-                    'luxembourg' => false,
-                ],
-            ])
-            ->add('nameUser')
-            ->add('firstnameUser')
             ->add('email')
             ->add('confirm_email')
-            ->add('productBY')
-            ->add('methodOfPayment')
-            ->add('phone')
-            ->add('AddAnotherDeliveryAdress')
+            ->add('userInformations', BilingAdressType::class)
+            ->add('shipping', DeliveryAdressType::class)
         ;
     }
 

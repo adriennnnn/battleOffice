@@ -10,66 +10,59 @@
 </style>
 
 {# Etape 2 #}
-{{ form_start(form) }}
+
 <div class="card step_2">
 	<div class="card-content">
 		<span class="card-title color_product_primary center-align">Étape 2</span>
-		<p class="h6 center-align">Remplissez ce formulaire</p>*
+		<p class="h6 center-align">Remplissez ce formulaire</p>
 		<div class="form-wrapper">
 			<div class="input-field">
-				{{ form_widget(form.firstnameUser) }}
+				{{ form_widget(form.userInformations.firstname) }}
 				<label>Prénom</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.nameUser, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.name) }}
 				<label>Nom</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.billingAdress, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.adress) }}
 				<label>Adresse</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.ComplementAdress, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.complementAdress) }}
 				<label>Complément adr.</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.city, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.city) }}
 				<label>Ville</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.postalCode, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.postalCode) }}
 				<label>Code postal</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				<select>
-					<option>France<p>🇫🇷</p>
-					</option>
-					<option>Belgique<p>🇧🇪</p>
-					</option>
-					<option>Luxembourg<p>🇱🇺</p>
-					</option>
-				</select>
+				{{ form_widget(form.userInformations.country) }}
 				<label>Pays</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.phone, {'attr': { "required": false }}) }}
+				{{ form_widget(form.userInformations.phone) }}
 				<label>Téléphone</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.email, {'attr': { "required": false }}) }}
+				{{ form_widget(form.email) }}
 				<label>Email</label>
 				<div class="form-error"></div>
 			</div>
 			<div class="input-field">
-				{{ form_widget(form.confirm_email, {'attr': { "required": false }}) }}
+				{{ form_widget(form.confirm_email) }}
 				<label>Confirmation email</label>
 				<div class="form-error"></div>
 			</div>
@@ -81,55 +74,44 @@
 				<i class="material-icons">markunread_mailbox</i>Adresse de livraison différente ?</div>
 			<div class="collapsible-body">
 				<div class="input-field">
-					{{ form_widget(formdelivery.firstname, {'attr': { "required": false }}) }}
-					<label>Prénom</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.name, {'attr': { "required": false }}) }}
-					<label>Nom</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.adress, {'attr': { "required": false }}) }}
-					<label>Adresse</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.complementAdress, {'attr': { "required": false }}) }}
-					<label>Complément adr.</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.city, {'attr': { "required": false }}) }}
-					<label>Ville</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.postalCode, {'attr': { "required": false }}) }}
-					<label>Code postal</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					<select>
-						<option>France
-							<p>🇫🇷</p>
-						</option>
-						<option>Belgique
-							<p>🇧🇪</p>
-						</option>
-						<option>Luxembourg
-							<p>🇱🇺</p>
-						</option>
-					</select>
-					<label>Pays</label>
-					<div class="form-error"></div>
-				</div>
-				<div class="input-field">
-					{{ form_widget(formdelivery.phone, {'attr': { "required": false }}) }}
-					<label>Téléphone</label>
-					<div class="form-error"></div>
-				</div>
+				{{ form_widget(form.shipping.firstname) }}
+				<label>Prénom</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.name) }}
+				<label>Nom</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.adress) }}
+				<label>Adresse</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.complementAdress) }}
+				<label>Complément adr.</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.city) }}
+				<label>Ville</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.postalCode) }}
+				<label>Code postal</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.country) }}
+				<label>Pays</label>
+				<div class="form-error"></div>
+			</div>
+			<div class="input-field">
+				{{ form_widget(form.shipping.phone) }}
+				<label>Téléphone</label>
+				<div class="form-error"></div>
 			</div>
 		</li>
 	</ul>
@@ -146,7 +128,7 @@
 				<div class="collapsible-body card-form">
 					<div class="row">
 						<div class="center-align">
-							<button type="submit" name="order[payment_method]" value="lpmonetico" class="btn-large btn-block waves-effect waves-light" >Continuer</button>
+							<button type="submit" name="payment" value="lpmonetico" class="btn-large btn-block waves-effect waves-light" >Continuer</button>
 							<p>J'accepte les
 								<a href="https://feelwellshop.com/fr/conditions-generales-de-ventes" target="_blank">conditions générales de vente</a>
 							</p>
@@ -161,7 +143,7 @@
 				<div class="collapsible-body">
 					<div class="row">
 						<div class="center-align">
-							<button type="submit" name="order[payment_method]" value="lppaypal" class="btn-large btn-block waves-effect waves-light">Continuer sur PayPal</button>
+							<button type="submit" name="payment" value="lppaypal" class="btn-large btn-block waves-effect waves-light">Continuer sur PayPal</button>
 							<p>J'accepte les
 								<a href="https://feelwellshop.com/fr/conditions-generales-de-ventes" target="_blank">conditions générales de vente</a>
 							</p>
@@ -173,5 +155,5 @@
 	</div>
 </div>
 
-{{ form_end(form) }}
+
 
